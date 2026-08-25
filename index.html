@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bookmarker</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@300..1000&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+
+<main class="page-shell">
+    <section class="intro" aria-labelledby="page-title">
+        <div class="title-row"><h1 id="page-title">Bookmarker<span>.</span></h1><div class="title-actions"><button class="add-button" id="open-modal" type="button"><span aria-hidden="true">+</span> Add bookmark</button><div class="settings-wrap"><button class="settings-button" id="settings-button" type="button" aria-label="Open bookmark settings" aria-expanded="false">&#9881;</button><div class="settings-menu" id="settings-menu" hidden><button id="export-bookmarks" type="button">&#8595; Download save data</button><button id="import-bookmarks" type="button">&#8593; Upload save data</button><input id="import-file" type="file" accept="application/json,.json" hidden></div></div></div></div>
+        <label class="search-box">
+            <span class="search-icon" aria-hidden="true">⌕</span>
+            <span class="sr-only">Search bookmarks</span>
+            <input id="bookmark-search" type="search" placeholder="Search bookmarks..." autocomplete="off">
+            <kbd>/</kbd>
+        </label>
+    </section>
+
+    <nav class="category-bar" aria-label="Bookmark categories">
+        <div class="category-tabs" role="tablist" aria-label="Filter bookmarks">
+            <button class="category-button active" type="button" data-category="all" role="tab" aria-selected="true">All bookmarks <span>0</span></button>
+            <div id="custom-categories"></div>
+        </div>
+        <label class="sort-control">Sort <select id="sort-bookmarks"><option value="newest">Newest</option><option value="title">Title A-Z</option><option value="category">Category</option></select></label>
+    </nav>
+
+    <section class="bookmark-grid" id="bookmark-grid" aria-live="polite">
+        <p class="empty-state" id="empty-state" hidden>No bookmarks match that search.</p>
+    </section>
+</main>
+
+<div class="modal-backdrop" id="bookmark-modal" hidden>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-heading"><div><p class="eyebrow">new shortcut</p><h2 id="modal-title">Add bookmark</h2></div><button class="close-button" id="close-modal" type="button" aria-label="Close dialog">&times;</button></div>
+        <form id="bookmark-form">
+            <label>Title<input name="title" type="text" placeholder="e.g. GitHub" required></label>
+            <label>URL<input name="url" type="text" inputmode="url" placeholder="https://example.com or app://link" required></label>
+            <label>Image URL <span class="optional">optional</span><input name="image" type="url" placeholder="https://example.com/icon.png"></label>
+            <label>Tags <span class="optional">select existing or type a new tag</span><input name="tags" type="text" list="bookmark-tag-options" placeholder="work, tools" autocomplete="off"></label>
+            <datalist id="bookmark-tag-options"></datalist>
+            <label class="temporary-toggle"><input name="temporary" type="checkbox" id="temporary-bookmark"> Temporary bookmark</label>
+            <div id="expiry-field" class="expiry-fields" hidden><label>Delete date<input class="date-input" name="expiresDate" type="date"></label><label>Time<input name="expiresTime" type="time" value="23:59"></label></div>
+            <p class="form-note">Add at least one tag to create a filter for it.</p>
+            <div class="form-actions"><button class="cancel-button" id="cancel-modal" type="button">Cancel</button><button class="save-button" type="submit">Save bookmark</button></div>
+        </form>
+    </section>
+</div>
+
+<div class="modal-backdrop" id="delete-modal" hidden>
+    <section class="modal confirm-modal" role="dialog" aria-modal="true" aria-labelledby="delete-title">
+        <div class="modal-heading"><div><p class="eyebrow">remove shortcut</p><h2 id="delete-title">Delete bookmark?</h2></div><button class="close-button" id="close-delete" type="button" aria-label="Close dialog">&times;</button></div>
+        <p class="confirm-copy">This will remove <strong id="delete-name"></strong> from your bookmarks.</p>
+        <div class="form-actions"><button class="cancel-button" id="cancel-delete" type="button">Cancel</button><button class="delete-confirm-button" id="confirm-delete" type="button">Delete bookmark</button></div>
+    </section>
+</div>
+
+<script src="index.js"></script>
+    </body>
+</html>

@@ -38,7 +38,7 @@ body {
   position: relative;
   min-height: 100vh;
   margin: 0;
-  padding: 24px clamp(18px, 4.5vw, 72px) 54px;
+  padding: 24px clamp(18px, 4.a5vw, 72px) 54px;
   overflow-x: hidden;
   color: var(--ink);
   font-family: var(--body);

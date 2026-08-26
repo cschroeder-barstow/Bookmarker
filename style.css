@@ -26,6 +26,14 @@ html {
   background: var(--bg);
 }
 
+footer {
+  margin-top: 42px;
+  padding: 24px 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  text-align: center;
+}
+
 body {
   position: relative;
   min-height: 100vh;

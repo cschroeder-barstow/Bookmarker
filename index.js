@@ -52,6 +52,15 @@ function safeUrl(value) {
   return /^[a-z][a-z\d+.-]*:\S+$/i.test(trimmed) ? trimmed : "";
 }
 
+function fallbackImage(url) {
+  try {
+    const hostname = new URL(url).hostname;
+    return hostname ? `https://www.google.com/s2/favicons?domain=${encodeURIComponent(hostname)}&sz=256` : "";
+  } catch {
+    return "";
+  }
+}
+
 function saveBookmarks() {
   localStorage.setItem("gdev-bookmarks", JSON.stringify(bookmarks));
 }
@@ -105,7 +114,8 @@ function renderBookmarks() {
     card.dataset.id = bookmark.id;
     card.dataset.category = bookmark.tags.join(" ");
     card.dataset.name = bookmark.title;
-    card.innerHTML = `<a class="bookmark-icon" href="${escapeHtml(bookmark.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(bookmark.title)}"><img src="${escapeHtml(bookmark.image || "")}" alt="${escapeHtml(bookmark.title)} icon" width="150" height="150"><span class="open-arrow" aria-hidden="true">↗</span></a><div class="bookmark-info"><h2>${escapeHtml(bookmark.title)}</h2><div class="bookmark-actions"><div class="bookmark-tags">${bookmark.tags.map((tag) => `<span class="category-label">${escapeHtml(tag)}</span>`).join("")}</div><div class="card-buttons"><button class="edit-button" type="button" aria-label="Edit ${escapeHtml(bookmark.title)}" title="Edit bookmark">&#9998;</button><button class="delete-button" type="button" aria-label="Delete ${escapeHtml(bookmark.title)}" title="Delete bookmark">&times;</button></div></div></div>`;
+    const image = bookmark.image || fallbackImage(bookmark.url);
+    card.innerHTML = `<a class="bookmark-icon" href="${escapeHtml(bookmark.url)}" target="_blank" rel="noopener noreferrer" aria-label="Open ${escapeHtml(bookmark.title)}"><img src="${escapeHtml(image)}" alt="${escapeHtml(bookmark.title)} icon" width="150" height="150"><span class="open-arrow" aria-hidden="true">↗</span></a><div class="bookmark-info"><h2>${escapeHtml(bookmark.title)}</h2><div class="bookmark-actions"><div class="bookmark-tags">${bookmark.tags.map((tag) => `<span class="category-label">${escapeHtml(tag)}</span>`).join("")}</div><div class="card-buttons"><button class="edit-button" type="button" aria-label="Edit ${escapeHtml(bookmark.title)}" title="Edit bookmark">&#9998;</button><button class="delete-button" type="button" aria-label="Delete ${escapeHtml(bookmark.title)}" title="Delete bookmark">&times;</button></div></div></div>`;
     card.querySelector(".edit-button").addEventListener("click", () => openEditModal(bookmark.id));
     card.querySelector(".delete-button").addEventListener("click", () => openDeleteModal(bookmarks.findIndex((item) => item.id === bookmark.id)));
     bookmarkGrid.insertBefore(card, emptyState);

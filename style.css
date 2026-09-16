@@ -89,6 +89,7 @@ a {
 
 .title-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: end;
   justify-content: space-between;
   gap: 20px;
@@ -122,6 +123,8 @@ h1 span {
 
 .title-actions {
   display: flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
   align-items: center;
   gap: 9px;
 }
@@ -267,6 +270,7 @@ kbd {
 
 .category-bar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
@@ -275,6 +279,8 @@ kbd {
 
 .category-tabs {
   display: flex;
+  min-width: 0;
+  flex: 1 1 500px;
   flex-wrap: wrap;
   gap: 7px;
 }
@@ -312,6 +318,8 @@ kbd {
 
 .sort-control {
   display: flex;
+  flex: 0 1 auto;
+  min-width: max-content;
   align-items: center;
   gap: 7px;
   color: var(--muted);
@@ -433,6 +441,7 @@ kbd {
   bottom: 0;
   left: 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: end;
   justify-content: space-between;
   gap: 10px;
@@ -440,6 +449,7 @@ kbd {
 }
 
 .bookmark-info h2 {
+  min-width: 0;
   max-width: 100%;
   margin: 0;
   overflow-wrap: anywhere;
@@ -451,6 +461,7 @@ kbd {
 
 .bookmark-actions {
   display: flex;
+  flex: 1 1 100%;
   min-width: 0;
   align-items: start;
   justify-content: space-between;
@@ -483,6 +494,9 @@ kbd {
 
 .bookmark-tags {
   display: flex;
+  min-width: 0;
+  max-height: 54px;
+  overflow-y: auto;
   flex-wrap: wrap;
   justify-content: end;
   gap: 4px;

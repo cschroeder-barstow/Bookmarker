@@ -14,18 +14,21 @@
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
   <style>
     .guide { width: min(1180px, 100%); margin: 0 auto; }
-    .guide-header { display: flex; align-items: end; justify-content: space-between; gap: 28px; padding: 34px 0 42px; border-bottom: 1px solid var(--line); }
+    .guide-header { position: relative; display: flex; align-items: end; justify-content: space-between; gap: 28px; padding: 34px 0 42px; border-bottom: 1px solid var(--line); }
+    .guide-header::after { position: absolute; right: 0; bottom: -1px; width: 110px; height: 2px; content: ""; background: var(--blue-bright); box-shadow: 0 0 18px rgba(139,176,255,.7); }
     .guide-kicker, .section-kicker { color: var(--blue-bright); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
     .guide-kicker { font-family: var(--display); font-size: .78rem; }
     .guide-header h1 { max-width: 760px; margin: 12px 0 16px; font-size: clamp(3rem, 7vw, 6.5rem); line-height: .88; }
     .lede { max-width: 680px; margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.65; }
+    .guide-meta { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 22px; color: var(--dim); font-family: ui-monospace,SFMono-Regular,Menlo,monospace; font-size: .68rem; letter-spacing: .04em; text-transform: uppercase; }
+    .guide-meta span::before { margin-right: 6px; color: var(--blue-bright); content: "//"; }
     .back-link { display: inline-flex; flex: 0 0 auto; padding: 10px 13px; color: var(--blue-bright); font-size: .78rem; text-decoration: none; border: 1px solid var(--line); border-radius: 4px; background: rgba(9,20,48,.58); }
     .back-link:hover { color: var(--ink); border-color: var(--line-bright); }
     .guide-layout { display: grid; grid-template-columns: 215px minmax(0,1fr); gap: clamp(28px,6vw,78px); padding: 42px 0 20px; }
-    .guide-nav { position: sticky; top: 24px; align-self: start; padding: 16px 0 18px 18px; border-left: 1px solid var(--line); }
+    .guide-nav { position: sticky; top: 24px; align-self: start; padding: 16px 0 18px 18px; border-left: 1px solid var(--line); background: linear-gradient(90deg, rgba(9,18,42,.5), transparent); }
     .guide-nav p { margin-bottom: 13px; color: var(--dim); font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
     .guide-nav a { display: block; padding: 7px 0; color: var(--muted); font-size: .78rem; text-decoration: none; }
-    .guide-nav a:hover { color: var(--blue-bright); }
+    .guide-nav a:hover { color: var(--blue-bright); transform: translateX(4px); }
     .guide-content { min-width: 0; }
     .guide-section { scroll-margin-top: 24px; margin-bottom: 64px; }
     .guide-section h2 { margin: 8px 0 16px; color: var(--ink); font-family: var(--display); font-size: clamp(1.7rem,3vw,2.6rem); line-height: 1; }
@@ -38,7 +41,8 @@
     .callout { max-width: 760px; margin: 22px 0; padding: 17px 19px; border-left: 2px solid var(--blue-bright); background: rgba(79,130,255,.08); }
     .callout p { margin: 0; }
     .guide-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; max-width: 820px; margin-top: 22px; }
-    .guide-card { padding: 18px; border: 1px solid var(--line); border-radius: 7px; background: rgba(9,18,42,.58); }
+    .guide-card { position: relative; padding: 18px; border: 1px solid var(--line); border-radius: 7px; background: linear-gradient(135deg, rgba(14,29,65,.74), rgba(9,18,42,.48)); }
+    .guide-card::before { position: absolute; top: 0; left: 18px; width: 28px; height: 2px; content: ""; background: var(--blue-bright); }
     .guide-card h3 { margin: 0 0 8px; font-size: 1rem; }
     .guide-card p { margin: 0; font-size: .84rem; line-height: 1.6; }
     .table-wrap { max-width: 820px; overflow-x: auto; border: 1px solid var(--line); border-radius: 7px; }
@@ -66,6 +70,7 @@
         <div class="guide-kicker">Bookmarker / documentation</div>
         <h1 id="top">Keep your shortcuts close.</h1>
         <p class="lede">A complete guide to saving, sorting, searching, backing up, and maintaining a focused personal launchpad for websites and local apps.</p>
+        <div class="guide-meta"><span>v1.1.1</span><span>local-first</span><span>reference build</span></div>
       </div>
       <a class="back-link" href="index.html">&#8592; Back to app</a>
     </header>

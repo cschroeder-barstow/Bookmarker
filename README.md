@@ -6,7 +6,7 @@
 ██████╔╝╚██████╔╝╚██████╔╝██║  ██╗██║ ╚═╝ ██║██║  ██║██║  ██╗███████╗██║  ██║
 ╚═════╝  ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝
 ```
-![Static Badge](https://img.shields.io/badge/current_build-v1.1.0-red)
+![Static Badge](https://img.shields.io/badge/current_build-v1.1.1-red)
 
 Bookmarker is a free, open-source, lightweight bookmark manager.
 

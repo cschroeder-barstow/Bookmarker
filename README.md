@@ -33,6 +33,7 @@ See full update log at:
 
 - 08/24/26 - v1.0.0 public release
 - 08/29/26 - v1.0.1 bug fixes and ui rework
-- 09/15/26 - v1.1.0 auto image feature
-
+- 09/14/26 - v1.1.0 auto image feature
+- 09/15/26 - v1.1.1 bug fixes with ui scaling
+  
 Made by galaxydev - 08/24/26

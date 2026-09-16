@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The complete Bookmarker user guide for creating, organizing, searching, and backing up bookmarks.">
+  <title>Bookmarker User Guide</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@300..1000&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+  <style>
+    .guide { width: min(1180px, 100%); margin: 0 auto; }
+    .guide-header { display: flex; align-items: end; justify-content: space-between; gap: 28px; padding: 34px 0 42px; border-bottom: 1px solid var(--line); }
+    .guide-kicker, .section-kicker { color: var(--blue-bright); font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .guide-kicker { font-family: var(--display); font-size: .78rem; }
+    .guide-header h1 { max-width: 760px; margin: 12px 0 16px; font-size: clamp(3rem, 7vw, 6.5rem); line-height: .88; }
+    .lede { max-width: 680px; margin: 0; color: var(--muted); font-size: 1.05rem; line-height: 1.65; }
+    .back-link { display: inline-flex; flex: 0 0 auto; padding: 10px 13px; color: var(--blue-bright); font-size: .78rem; text-decoration: none; border: 1px solid var(--line); border-radius: 4px; background: rgba(9,20,48,.58); }
+    .back-link:hover { color: var(--ink); border-color: var(--line-bright); }
+    .guide-layout { display: grid; grid-template-columns: 215px minmax(0,1fr); gap: clamp(28px,6vw,78px); padding: 42px 0 20px; }
+    .guide-nav { position: sticky; top: 24px; align-self: start; padding: 16px 0 18px 18px; border-left: 1px solid var(--line); }
+    .guide-nav p { margin-bottom: 13px; color: var(--dim); font-size: .66rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .guide-nav a { display: block; padding: 7px 0; color: var(--muted); font-size: .78rem; text-decoration: none; }
+    .guide-nav a:hover { color: var(--blue-bright); }
+    .guide-content { min-width: 0; }
+    .guide-section { scroll-margin-top: 24px; margin-bottom: 64px; }
+    .guide-section h2 { margin: 8px 0 16px; color: var(--ink); font-family: var(--display); font-size: clamp(1.7rem,3vw,2.6rem); line-height: 1; }
+    .guide-section h3 { margin: 30px 0 9px; color: var(--ink); font-family: var(--display); font-size: 1.15rem; }
+    .guide-section p, .guide-section li { max-width: 760px; color: var(--muted); font-size: .93rem; line-height: 1.75; }
+    .guide-section ul, .guide-section ol { max-width: 760px; margin: 10px 0 0; padding-left: 22px; }
+    .guide-section li + li { margin-top: 7px; }
+    .guide-section strong { color: var(--ink); }
+    .guide-section code, .callout code { padding: 2px 5px; color: var(--blue-bright); font-family: ui-monospace,SFMono-Regular,Menlo,monospace; font-size: .86em; border: 1px solid rgba(117,157,255,.18); border-radius: 3px; background: rgba(3,9,23,.7); }
+    .callout { max-width: 760px; margin: 22px 0; padding: 17px 19px; border-left: 2px solid var(--blue-bright); background: rgba(79,130,255,.08); }
+    .callout p { margin: 0; }
+    .guide-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; max-width: 820px; margin-top: 22px; }
+    .guide-card { padding: 18px; border: 1px solid var(--line); border-radius: 7px; background: rgba(9,18,42,.58); }
+    .guide-card h3 { margin: 0 0 8px; font-size: 1rem; }
+    .guide-card p { margin: 0; font-size: .84rem; line-height: 1.6; }
+    .table-wrap { max-width: 820px; overflow-x: auto; border: 1px solid var(--line); border-radius: 7px; }
+    .guide-table { width: 100%; min-width: 560px; border-collapse: collapse; color: var(--muted); font-size: .82rem; }
+    .guide-table th, .guide-table td { padding: 13px 15px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    .guide-table tr:last-child td { border-bottom: 0; }
+    .guide-table th { color: var(--blue-bright); font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; background: rgba(79,130,255,.08); }
+    .guide-table td:first-child { width: 30%; color: var(--ink); font-weight: 600; }
+    .guide-footer { margin-top: 18px; padding: 30px 0 12px; color: var(--dim); font-size: .7rem; text-align: center; border-top: 1px solid var(--line); }
+    @media (max-width: 760px) {
+      .guide-header { display: block; padding-top: 24px; }
+      .back-link { margin-top: 24px; }
+      .guide-layout { display: block; padding-top: 28px; }
+      .guide-nav { position: static; display: flex; flex-wrap: wrap; gap: 5px 16px; margin-bottom: 42px; padding: 0 0 16px; border-left: 0; border-bottom: 1px solid var(--line); }
+      .guide-nav p { flex-basis: 100%; margin-bottom: 2px; }
+      .guide-nav a { padding: 4px 0; }
+    }
+    @media (max-width: 500px) { .guide-grid { grid-template-columns: 1fr; } .guide-section { margin-bottom: 50px; } }
+  </style>
+</head>
+<body>
+  <main class="guide">
+    <header class="guide-header">
+      <div>
+        <div class="guide-kicker">Bookmarker / documentation</div>
+        <h1 id="top">Keep your shortcuts close.</h1>
+        <p class="lede">A complete guide to saving, sorting, searching, backing up, and maintaining a focused personal launchpad for websites and local apps.</p>
+      </div>
+      <a class="back-link" href="index.html">&#8592; Back to app</a>
+    </header>
+    <div class="guide-layout">
+      <nav class="guide-nav" aria-label="Documentation contents">
+        <p>On this page</p>
+        <a href="#quick-start">Quick start</a>
+        <a href="#add">Add a bookmark</a>
+        <a href="#organize">Organize and filter</a>
+        <a href="#search">Search and sort</a>
+        <a href="#temporary">Temporary bookmarks</a>
+        <a href="#backup">Back up data</a>
+        <a href="#images">Images and fallbacks</a>
+        <a href="#troubleshooting">Troubleshooting</a>
+        <a href="#updates">Update history</a>
+      </nav>
+      <div class="guide-content">
+        <section class="guide-section" id="quick-start">
+          <div class="section-kicker">01 / orientation</div><h2>Quick start</h2>
+          <p>Bookmarker is a free, open-source, lightweight bookmark manager for links you want to reach quickly. It runs as a client-side web app: your bookmarks stay in this browser, while the main screen remains useful for both a handful of shortcuts and a much larger collection.</p>
+          <div class="guide-grid">
+            <article class="guide-card"><h3>Save a destination</h3><p>Use <strong>Add bookmark</strong> to create a card with a title, URL, optional image, and one or more tags.</p></article>
+            <article class="guide-card"><h3>Find it later</h3><p>Search by title, select a category, or choose a sort mode to narrow a busy collection.</p></article>
+            <article class="guide-card"><h3>Keep data portable</h3><p>Download save data as JSON before clearing site storage or changing browser profiles.</p></article>
+            <article class="guide-card"><h3>Clean up automatically</h3><p>Temporary bookmarks remove themselves after their chosen date and time.</p></article>
+          </div>
+        </section>
+        <section class="guide-section" id="add">
+          <div class="section-kicker">02 / create</div><h2>Add a bookmark</h2>
+          <p>Open <strong>Add bookmark</strong> in the upper-left area of the app. Each field has a distinct job and the form accepts both normal web destinations and custom app-style links.</p>
+          <div class="table-wrap"><table class="guide-table"><thead><tr><th>Field</th><th>What to enter</th><th>How it is used</th></tr></thead><tbody>
+            <tr><td>Title</td><td>A recognizable name such as <code>GitHub</code> or <code>Design references</code>.</td><td>The card label and the text searched by the search field.</td></tr>
+            <tr><td>URL</td><td>A complete address such as <code>https://example.com</code> or <code>app://link</code>.</td><td>Opens in a new browser tab or hands a custom scheme to the operating system.</td></tr>
+            <tr><td>Image URL</td><td>An optional direct image URL such as <code>https://example.com/icon.png</code>.</td><td>Becomes the card artwork. Leave blank to use automatic site-icon fallback.</td></tr>
+            <tr><td>Tags</td><td>Comma-separated labels such as <code>work, tools</code>.</td><td>Creates category filters. Empty tags become <code>Other</code>.</td></tr>
+          </tbody></table></div>
+          <h3>A reliable first bookmark</h3><ol><li>Choose a title you would naturally type when searching later.</li><li>Paste the complete URL, including <code>https://</code> where appropriate.</li><li>Use two or three broad tags instead of a unique tag for every item.</li><li>Save it, then open the card once to confirm the destination.</li></ol>
+          <div class="callout"><p><strong>URL safety:</strong> empty addresses and unsafe protocols including <code>javascript:</code>, <code>data:</code>, <code>vbscript:</code>, and <code>file:</code> are rejected intentionally.</p></div>
+        </section>
+        <section class="guide-section" id="organize">
+          <div class="section-kicker">03 / structure</div><h2>Organize and filter</h2>
+          <p>Every tag becomes a filter in the category bar. Display labels are normalized when saved: their first letter is capitalized and duplicate labels on one bookmark are removed.</p>
+          <h3>Build a useful tag system</h3><ul><li><strong>Use stable categories:</strong> Work, Personal, Tools, Reading, Reference, and Projects are good starting points.</li><li><strong>Tag by purpose:</strong> A bookmark can belong to both <code>Work</code> and <code>Research</code>.</li><li><strong>Keep names short:</strong> Short labels scan and wrap more cleanly.</li><li><strong>Use Temp intentionally:</strong> Temporary bookmarks receive a visible <code>Temp</code> tag automatically.</li></ul>
+          <h3>Category behavior</h3><p><strong>All bookmarks</strong> returns to the complete collection. A custom category shows cards containing that exact tag. The number beside a category counts saved bookmarks carrying it, not the number left after a search.</p>
+        </section>
+        <section class="guide-section" id="search">
+          <div class="section-kicker">04 / navigate</div><h2>Search and sort</h2>
+          <p>The search field filters cards as you type and currently checks bookmark titles. On a desktop keyboard, press <code>/</code> from anywhere outside another input to focus search immediately.</p>
+          <div class="guide-grid"><article class="guide-card"><h3>Newest</h3><p>The default view. Recently created bookmarks appear first.</p></article><article class="guide-card"><h3>Title A-Z</h3><p>Alphabetical title order for finding a known name.</p></article><article class="guide-card"><h3>Category</h3><p>Sorts by the first tag, then by title, to group related links.</p></article><article class="guide-card"><h3>No results</h3><p>A clear empty-state message appears when a filter combination matches nothing.</p></article></div>
+        </section>
+        <section class="guide-section" id="temporary">
+          <div class="section-kicker">05 / lifecycle</div><h2>Use temporary bookmarks</h2>
+          <p>Temporary bookmarks are useful for event pages, one-time forms, short research leads, and project links that should not become permanent clutter.</p>
+          <ol><li>Enable <strong>Temporary bookmark</strong> while creating or editing a bookmark.</li><li>Choose a delete date and time; the time uses your browser's local time.</li><li>Save it. Bookmarker adds <code>Temp</code> automatically.</li><li>After the deadline, cleanup removes it when the app checks for expired items.</li></ol>
+          <div class="callout"><p>Expiration is permanent once cleanup removes the item. Export a backup first if you may need the link later.</p></div>
+        </section>
+        <section class="guide-section" id="backup">
+          <div class="section-kicker">06 / portability</div><h2>Back up and restore</h2>
+          <p>Open the gear menu beside <strong>Add bookmark</strong> to find the save-data tools. Exporting creates a JSON file containing the current collection; uploading restores a previously exported collection after validation.</p>
+          <h3>Download save data</h3><p>Choose <strong>Download save data</strong>. Your browser downloads a file named like <code>savedbookmarks(YYYY-MM-DD).json</code>. Export after a major cleanup, before clearing browser data, and before moving browser profiles.</p>
+          <h3>Upload save data</h3><p>Choose <strong>Upload save data</strong> and select an exported JSON file. Import replaces the current collection; it does not merge with it. Export your current collection first if you want a way back.</p>
+          <h3>What is stored</h3><p>Records include titles, URLs, image URLs, tags, creation times, and temporary expiration details. Data is stored locally in this browser; there is no built-in account or cloud sync.</p>
+        </section>
+        <section class="guide-section" id="images">
+          <div class="section-kicker">07 / appearance</div><h2>Images and automatic fallbacks</h2>
+          <p>A custom image is optional. When Image URL is blank, Bookmarker derives the hostname from the bookmark URL and requests a Google-hosted favicon for that site. This provides a recognizable card image without requiring manual icon hunting.</p>
+          <ul><li>Custom image URLs always take priority.</li><li>The fallback uses the website domain, not the bookmark title.</li><li>Sites without a useful favicon may return a generic or low-resolution icon.</li><li>Image services need an internet connection; the bookmark URL remains stored locally.</li></ul>
+          <div class="callout"><p>For the most consistent result, provide a direct image URL you trust. For quick setup, leaving the field blank is usually best.</p></div>
+        </section>
+        <section class="guide-section" id="troubleshooting">
+          <div class="section-kicker">08 / recovery</div><h2>Troubleshooting</h2>
+          <h3>The bookmark will not save</h3><p>Check Title and URL, confirm the URL includes a valid scheme, and fill both expiration fields if the bookmark is temporary. Unsafe protocols are intentionally rejected.</p>
+          <h3>The card image is blank or generic</h3><p>A custom image URL must point to the image file itself, not a page containing an image. Otherwise the automatic favicon service may be unavailable or the site may not provide a useful icon.</p>
+          <h3>Bookmarks disappeared</h3><p>Check that you are using the same browser profile. Local storage differs between browsers, devices, private windows, and profiles. Restore an exported JSON file through the gear menu.</p>
+          <h3>Import reports invalid save data</h3><p>Use a file exported by Bookmarker, not a screenshot or copied page. A valid file must remain a JSON array with a title, valid URL, and tags array in each record.</p>
+          <h3>A temporary bookmark is still visible</h3><p>Cleanup runs at startup and periodically while the app stays open. Reload after the expiration time if the app was closed at the deadline.</p>
+        </section>
+        <section class="guide-section" id="updates">
+          <div class="section-kicker">09 / release notes</div><h2>Update history</h2>
+          <div class="table-wrap"><table class="guide-table"><thead><tr><th>Date</th><th>Version</th><th>Highlights</th></tr></thead><tbody><tr><td>August 24, 2026</td><td>v1.0.0</td><td>Public release of the lightweight bookmark manager.</td></tr><tr><td>August 29, 2026</td><td>v1.0.1</td><td>Bug fixes and user-interface rework.</td></tr><tr><td>September 14, 2026</td><td>v1.1.0</td><td>Automatic image support for bookmarks without a custom image.</td></tr><tr><td>September 15, 2026</td><td>v1.1.1</td><td>User-interface scaling and responsive layout fixes.</td></tr></tbody></table></div>
+          <p>Bookmarker is made by galaxydev. It is free and open source.</p>
+        </section>
+      </div>
+    </div>
+    <footer class="guide-footer"><a class="docs-link" href="index.html">Return to Bookmarker</a><span aria-hidden="true"> &middot; </span>v1.1.1</footer>
+  </main>
+</body>
+</html>

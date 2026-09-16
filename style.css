@@ -34,6 +34,17 @@ footer {
   text-align: center;
 }
 
+.docs-link {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.docs-link:hover {
+  color: var(--blue-bright);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 body {
   position: relative;
   min-height: 100vh;

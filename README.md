@@ -29,7 +29,7 @@ https://example.com/icon.png
 
 Update Log:
 
-See full update log at:
+See full update log + more info at: https://cschroeder-barstow.github.io/Bookmarker/docs.html
 
 - 08/24/26 - v1.0.0 public release
 - 08/29/26 - v1.0.1 bug fixes and ui rework

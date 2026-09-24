@@ -82,7 +82,8 @@ function closeSettings() {
 
 function renderCategories() {
   const categories = [...new Set(bookmarks.flatMap((bookmark) => bookmark.tags))].sort();
-  tagOptions.innerHTML = categories.map((category) => `<option value="${escapeHtml(category)}"></option>`).join("");
+  if (tagOptions) tagOptions.innerHTML = categories.map((category) => `<option value="${escapeHtml(category)}"></option>`).join("");
+  if (!customCategories) return;
   customCategories.innerHTML = categories.map((category) => {
     const count = bookmarks.filter((bookmark) => bookmark.tags.includes(category)).length;
     return `<button class="category-button" type="button" data-category="${escapeHtml(category)}" role="tab" aria-selected="false">${escapeHtml(category)} <span>${count}</span></button>`;
@@ -123,7 +124,7 @@ function renderBookmarks() {
 }
 
 function updateBookmarks() {
-  const query = searchInput.value.trim().toLowerCase();
+  const query = searchInput ? searchInput.value.trim().toLowerCase() : "";
   const cards = [...document.querySelectorAll(".bookmark-card")];
   let visibleCount = 0;
 
@@ -139,17 +140,18 @@ function updateBookmarks() {
   });
 
   emptyState.hidden = visibleCount !== 0;
-  document.querySelector(".category-button[data-category='all'] span").textContent = bookmarks.length;
+  const allCount = document.querySelector(".category-button[data-category='all'] span");
+  if (allCount) allCount.textContent = bookmarks.length;
 }
 
-searchInput.addEventListener("input", updateBookmarks);
-sortSelect.addEventListener("change", () => {
+if (searchInput) searchInput.addEventListener("input", updateBookmarks);
+if (sortSelect) sortSelect.addEventListener("change", () => {
   sortMode = sortSelect.value;
   renderBookmarks();
   updateBookmarks();
 });
 
-temporaryCheckbox.addEventListener("change", () => {
+if (temporaryCheckbox) temporaryCheckbox.addEventListener("change", () => {
   expiryField.hidden = !temporaryCheckbox.checked;
   form.elements.expiresDate.required = temporaryCheckbox.checked;
   form.elements.expiresTime.required = temporaryCheckbox.checked;
@@ -179,7 +181,7 @@ function closeDeleteModal() {
   deleteModal.hidden = true;
 }
 
-openModalButton.addEventListener("click", () => {
+if (openModalButton) openModalButton.addEventListener("click", () => {
   editingBookmarkId = null;
   modalTitle.textContent = "Add bookmark";
   modal.hidden = false;
@@ -207,11 +209,11 @@ function openEditModal(bookmarkId) {
   modal.hidden = false;
   form.elements.title.focus();
 }
-settingsButton.addEventListener("click", () => {
+if (settingsButton) settingsButton.addEventListener("click", () => {
   settingsMenu.hidden = !settingsMenu.hidden;
   settingsButton.setAttribute("aria-expanded", String(!settingsMenu.hidden));
 });
-exportButton.addEventListener("click", () => {
+if (exportButton) exportButton.addEventListener("click", () => {
   const file = new Blob([JSON.stringify(bookmarks, null, 2)], { type: "application/json" });
   const download = document.createElement("a");
   download.href = URL.createObjectURL(file);
@@ -221,8 +223,8 @@ exportButton.addEventListener("click", () => {
   URL.revokeObjectURL(download.href);
   closeSettings();
 });
-importButton.addEventListener("click", () => importFile.click());
-importFile.addEventListener("change", () => {
+if (importButton && importFile) importButton.addEventListener("click", () => importFile.click());
+if (importFile) importFile.addEventListener("change", () => {
   const [file] = importFile.files;
   if (!file) return;
   const reader = new FileReader();
@@ -241,6 +243,7 @@ importFile.addEventListener("change", () => {
       renderCategories();
       renderBookmarks();
       updateBookmarks();
+      if (importButton.classList.contains("import-button")) importButton.hidden = true;
       closeSettings();
     } catch {
       window.alert("That file is not valid bookmark save data.");
@@ -317,7 +320,7 @@ form.addEventListener("submit", (event) => {
 document.addEventListener("keydown", (event) => {
   if (event.key === "/" && document.activeElement !== searchInput) {
     event.preventDefault();
-    searchInput.focus();
+    if (searchInput) searchInput.focus();
   }
 });
 

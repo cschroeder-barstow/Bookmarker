@@ -89,6 +89,45 @@ a {
   margin: auto;
 }
 
+.widget-shell {
+  width: min(1220px, 100%);
+  margin: auto;
+}
+
+.widget-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 0 18px;
+}
+
+.widget-shell .bookmark-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 1.4vw, 19px);
+}
+
+.widget-shell .bookmark-card {
+  height: auto;
+  aspect-ratio: 1;
+}
+
+.import-button {
+  padding: 9px 13px;
+  color: var(--blue-bright);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border: 1px solid var(--line-bright);
+  border-radius: 4px;
+  background: rgba(9, 20, 48, 0.7);
+  cursor: pointer;
+}
+
+.import-button:hover {
+  color: var(--ink);
+  border-color: var(--blue-bright);
+  background: rgba(79, 130, 255, 0.16);
+}
+
 .intro {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(260px, 390px);
